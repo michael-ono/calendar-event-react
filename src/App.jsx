@@ -1,3 +1,4 @@
+import * as dateFnsLocale from "date-fns/locale/en-US";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import format from "date-fns/format";
 import parse from "date-fns/parse";
@@ -6,9 +7,9 @@ import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import ReactDatePicker from "react-datepicker";
 import { useState } from "react";
-import * as dateFnsLocale from "date-fns/locale/en-US";
-import moment from "moment/moment";
 import styled from "styled-components";
+import "react-datepicker/dist/react-datepicker.css";
+// import moment from "moment/moment";
 import "./App.css";
 
 let locale = dateFnsLocale;
@@ -62,20 +63,41 @@ const App = () => {
     setAllEvents([...allEvents, newEvent]);
   }
 
+  const handleAddEvent = () => {
+
+  }
+
   return (
     <div className="App">
       <StyledHeading>REACT CALENDAR APP</StyledHeading>
-      <StyledSubHeading>Add New event</StyledSubHeading>
-
-      <div>
-        <TextInput 
-          type="text" 
-          placeholder="Add title" 
-          value={newEvent.title} 
-          onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
-        />
-      </div>
-
+      
+      {/* <CenteredDiv> */}
+        <StyledSubHeading>Add New event</StyledSubHeading>
+        {/* <InputWrapper> */}
+          <TextInput
+            type="text"
+            placeholder="Add title"
+            value={newEvent.title}
+            onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+          />
+          <ReactDatePicker
+            placeholderText="Start Date"
+            style={{Marginright: "10px"}}
+            selected={newEvent.start}
+            onChange={(start) => setNewEvent({...newEvent, start})}
+          />
+          <ReactDatePicker
+            placeholderText="End Date"
+            style={{Marginright: "10px"}}
+            selected={newEvent.end}
+            onChange={(start) => setNewEvent({...newEvent, end})}
+          />
+          <SubmitButton type="submit" onClick={handleAddEvent}>
+            Add Event
+          </SubmitButton>
+        {/* </InputWrapper> */}
+      {/* </CenteredDiv> */}
+      
       <Calendar 
         localizer={localizer}
         events={allEvents}
@@ -106,4 +128,25 @@ const StyledSubHeading = styled.h2`
 const TextInput = styled.input`
   width: 20%;
   margin-right: 10px;
+`;
+
+const SubmitButton = styled.button`
+  margin-top: 10px;
+  display: inline-block;
+  width: 110px;
+  height: 30px;
+  border-radius: 6px;
+
+`;
+
+const SectionWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column
 `;
