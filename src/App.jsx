@@ -9,6 +9,7 @@ import ReactDatePicker from "react-datepicker";
 import { useState } from "react";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
+import toast, { Toaster } from "react-hot-toast";
 // import moment from "moment/moment";
 import "./App.css";
 
@@ -61,39 +62,48 @@ const App = () => {
   //spread the current event and append to new event
   const handleAddEvent = () => {
     setAllEvents([...allEvents, newEvent]);
-    
+    toast.success('Event added successfully!');
   }
 
   return (
     <div className="App">
+      <Toaster 
+        toastOptions={{
+          className: '',
+          style: {
+            fontFamily: "sans-serif",
+            color: '#713200',
+          },
+        }}
+      />
+      
       <StyledHeading>REACT CALENDAR APP</StyledHeading>
       
-        <StyledSubHeading>Add New event</StyledSubHeading>
-        <InputWrapper>
-          <TextInput
-            type="text"
-            placeholder="Add title"
-            value={newEvent.title}
-            onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
-          />
-          <br />
-
-          <ReactDatePicker
-            placeholderText="Start Date"
-            style={{Marginright: "10px"}}
-            selected={newEvent.start}
-            onChange={(start) => setNewEvent({...newEvent, start})}
-          />
-          <ReactDatePicker
-            placeholderText="End Date"
-            style={{Marginright: "10px"}}
-            selected={newEvent.end}
-            onChange={(end) => setNewEvent({...newEvent, end})}
-          />
-          <SubmitButton type="submit" onClick={handleAddEvent}>
-            Add Event
-          </SubmitButton>
-        </InputWrapper>
+      <StyledSubHeading>Add New event</StyledSubHeading>
+      <InputWrapper>
+        <TextInput
+          type="text"
+          placeholder="Add title"
+          value={newEvent.title}
+          onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+        />
+        <br />
+        <ReactDatePicker
+          placeholderText="Start Date"
+          style={{Marginright: "10px"}}
+          selected={newEvent.start}
+          onChange={(start) => setNewEvent({...newEvent, start})}
+        />
+        <ReactDatePicker
+          placeholderText="End Date"
+          style={{Marginright: "10px"}}
+          selected={newEvent.end}
+          onChange={(end) => setNewEvent({...newEvent, end})}
+        />
+        <SubmitButton type="submit" onClick={handleAddEvent}>
+          Add Event
+        </SubmitButton>
+      </InputWrapper>
       
       <Calendar 
         localizer={localizer}
