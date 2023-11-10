@@ -61,6 +61,7 @@ const App = () => {
   //spread the current event and append to new event
   const handleAddEvent = () => {
     setAllEvents([...allEvents, newEvent]);
+    
   }
 
   return (
@@ -135,10 +136,10 @@ const SubmitButton = styled.button`
   border-radius: 6px;
   cursor: pointer;
   &:hover {
-    background-color:#d5beb8;
+    color: white;
+    background-color:#000000;
     font-weight: 700;
   }
-
 `;
 
 const InputWrapper = styled.div`
