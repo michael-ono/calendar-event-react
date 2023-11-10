@@ -8,6 +8,7 @@ import ReactDatePicker from "react-datepicker";
 import { useState } from "react";
 import * as dateFnsLocale from "date-fns/locale/en-US";
 import moment from "moment/moment";
+import styled from "styled-components";
 import "./App.css";
 
 let locale = dateFnsLocale;
@@ -63,7 +64,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <h2>REACT CALENDAR APP</h2>
+      <StyledHeading>REACT CALENDAR APP</StyledHeading>
+      <StyledSubHeading>Add New event</StyledSubHeading>
+
+      <div>
+        <TextInput 
+          type="text" 
+          placeholder="Add title" 
+          value={newEvent.title} 
+          onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+        />
+      </div>
+
       <Calendar 
         localizer={localizer}
         events={allEvents}
@@ -78,9 +90,20 @@ const App = () => {
 export default App;
 
 const StyledHeading = styled.h2`
-  /* Add your desired CSS styles here */
-  color: red;
-  font-size: 24px;
+  color: #c24040;
+  font-size: 30px;
   font-family: sans-serif;
-  /* ... */
+  font-weight: 800;
+`;
+const StyledSubHeading = styled.h2`
+  color: #f5481d;
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+   font-size: 26px; 
+   font-weight: 600;
+`;
+
+const TextInput = styled.input`
+  width: 20%;
+  margin-right: 10px;
 `;
