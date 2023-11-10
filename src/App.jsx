@@ -59,27 +59,24 @@ const App = () => {
   const [allEvents, setAllEvents] = useState(events);
 
   //spread the current event and append to new event
-  const handleEvent = () => {
-    setAllEvents([...allEvents, newEvent]);
-  }
-
   const handleAddEvent = () => {
-
+    setAllEvents([...allEvents, newEvent]);
   }
 
   return (
     <div className="App">
       <StyledHeading>REACT CALENDAR APP</StyledHeading>
       
-      {/* <CenteredDiv> */}
         <StyledSubHeading>Add New event</StyledSubHeading>
-        {/* <InputWrapper> */}
+        <InputWrapper>
           <TextInput
             type="text"
             placeholder="Add title"
             value={newEvent.title}
             onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
           />
+          <br />
+
           <ReactDatePicker
             placeholderText="Start Date"
             style={{Marginright: "10px"}}
@@ -90,13 +87,12 @@ const App = () => {
             placeholderText="End Date"
             style={{Marginright: "10px"}}
             selected={newEvent.end}
-            onChange={(start) => setNewEvent({...newEvent, end})}
+            onChange={(end) => setNewEvent({...newEvent, end})}
           />
           <SubmitButton type="submit" onClick={handleAddEvent}>
             Add Event
           </SubmitButton>
-        {/* </InputWrapper> */}
-      {/* </CenteredDiv> */}
+        </InputWrapper>
       
       <Calendar 
         localizer={localizer}
@@ -121,8 +117,9 @@ const StyledSubHeading = styled.h2`
   color: #f5481d;
   font-size: 25px;
   font-family: 'Open Sans', sans-serif;
-   font-size: 26px; 
+   font-size: 28px; 
    font-weight: 600;
+   text-align: center;
 `;
 
 const TextInput = styled.input`
@@ -133,20 +130,20 @@ const TextInput = styled.input`
 const SubmitButton = styled.button`
   margin-top: 10px;
   display: inline-block;
-  width: 110px;
-  height: 30px;
+  width: 100px;
+  height: 25px;
   border-radius: 6px;
+  cursor: pointer;
+  &:hover {
+    background-color:#d5beb8;
+    font-weight: 700;
+  }
 
-`;
-
-const SectionWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const InputWrapper = styled.div`
   display: flex;
   justify-content: center;
-  flex-direction: column
+  flex-direction: column;
+  align-items: center;
 `;
